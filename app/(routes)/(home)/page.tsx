@@ -1,20 +1,7 @@
-"use client"
-
-import { Button } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
+import { HeaderMain } from "./components/HeaderMain"
 
 export default function Home() {
-  const handleClick = () => {
-    toast({
-      title: "Hello, World!",
-    })
-  }
-
   return (
-    <Button
-      onClick={handleClick}
-    >
-      Show Toast
-    </Button>
+    <HeaderMain />
   )
 }
