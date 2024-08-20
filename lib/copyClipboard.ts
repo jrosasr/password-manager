@@ -1,8 +1,8 @@
 import { toast } from "@/components/ui/use-toast";
 
-export const copyClipboard = (value: string) => {
+export const copyClipboard = (value: string, name?: string) => {
     navigator.clipboard.writeText(value);
     toast({
-        title: "✓ Copiado!",
+        title: `✓ ${name ?? "Copiado!"}`,
     }) 
 }

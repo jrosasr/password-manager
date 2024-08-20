@@ -34,8 +34,6 @@ export function LoginForm() {
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    
     const response = await signIn('credentials', {
       email: values.email,
       password: values.password,

@@ -33,7 +33,6 @@ import { FormAddElementProps } from "./FormAddElement.types";
 
 export function FormAddElement(props: FormAddElementProps) {
   const { userId } = props;
-  console.log(userId);
   
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -55,7 +54,6 @@ export function FormAddElement(props: FormAddElementProps) {
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     try {
       await axios.post("/api/items", values);
       toast({

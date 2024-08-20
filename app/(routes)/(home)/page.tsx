@@ -1,35 +1,39 @@
-import { getServerSession } from "next-auth"
-import { HeaderMain } from "./components/HeaderMain"
-import { redirect } from "next/navigation"
-import { db } from "@/lib/db"
+import { getServerSession } from "next-auth";
+import { HeaderMain } from "./components/HeaderMain";
+import { redirect } from "next/navigation";
+import { db } from "@/lib/db";
+import { TableData } from "./components/TableData";
 
 export default async function Home() {
-  const session = await getServerSession()
+  const session = await getServerSession();
 
   if (!session || !session.user?.email) {
-    return redirect('/login')
+    return redirect("/login");
   }
 
   const user = await db.user.findUnique({
     where: {
-      email: session?.user.email
+      email: session?.user.email,
     },
     include: {
       elements: {
         orderBy: {
-          createdAt: 'desc'
-        }
-      }
-    }
-  })
+          createdAt: "desc",
+        },
+      },
+    },
+  });
 
   console.log(user);
-  
-  if (!user) {
-    return redirect('/login')
+
+  if (!user || !user.elements) {
+    return redirect("/login");
   }
 
   return (
-    <HeaderMain userId={user.id} />
-  )
+    <>
+      <HeaderMain userId={user.id} />
+      <TableData elements={user.elements} />
+    </>
+  );
 }
