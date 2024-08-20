@@ -1,0 +1,20 @@
+services:
+  mongo:
+    image: mongo:latest
+    env_file:
+      - .env
+    volumes:
+      # - ./data:/data/db
+      - "mongo-db-volume:/data/db"
+    ports:
+      - "27017:27017"
+    networks:
+      - docker_network
+
+networks:
+  docker_network:
+    external: true
+
+volumes:
+  mongo-db-volume:
+    external: true

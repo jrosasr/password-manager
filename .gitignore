@@ -35,3 +35,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# for Docker
+.env
+.phpintel
+/.idea
+/.vscode
+/.vagrant
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+app.yaml
+
+data
