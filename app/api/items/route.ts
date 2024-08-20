@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const values = await req.json();
-
         const {
             typeElement,
             isFavourite,

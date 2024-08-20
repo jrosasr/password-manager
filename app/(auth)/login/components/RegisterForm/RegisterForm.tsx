@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { signIn } from "next-auth/react";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,16 +17,18 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
+  username: z.string().min(2).max(50),
   email: z.string().min(2).max(50),
   password: z.string().min(2).max(50),
 });
 
-export function LoginForm() {
+export function RegisterForm() {
   const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      username: "",
       email: "",
       password: "",
     },
@@ -34,26 +36,23 @@ export function LoginForm() {
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    
-    const response = await signIn('credentials', {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    })
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
+      body: JSON.stringify(values),
+    });
 
-    if (response?.status === 200) {
+    if (response.status === 200) {
       toast({
-        title: "login realizado correctamente",
+        title: "Cuenta creada correctamente",
       })
       router.push('/')
     } else {
-      toast({
-        title: "Error al realizar el login",
-        variant: "destructive",
-      })
+        toast({
+            title: "Error al realizar el registro",
+            variant: "destructive",
+        })
     }
-  } 
+  };
 
   return (
     <Form {...form}>
@@ -69,6 +68,20 @@ export function LoginForm() {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder="email@email.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Usuario</FormLabel>
+              <FormControl>
+                <Input placeholder="John Doe" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

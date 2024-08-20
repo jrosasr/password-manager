@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -30,8 +29,12 @@ import { generatePassword } from "@/lib/generatePassword";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { FormAddElementProps } from "./FormAddElement.types";
 
-export function FormAddElement() {
+export function FormAddElement(props: FormAddElementProps) {
+  const { userId } = props;
+  console.log(userId);
+  
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   // 1. Define your form.
@@ -46,7 +49,7 @@ export function FormAddElement() {
       password: "",
       urlWebsite: "",
       notes: "",
-      userId: "asdasd-asdasda",
+      userId,
     },
   });
 
@@ -68,7 +71,6 @@ export function FormAddElement() {
         password: "",
         urlWebsite: "",
         notes: "",
-        userId: "asdasd-asdasda",
       });
 
       router.refresh();
@@ -125,7 +127,7 @@ export function FormAddElement() {
 
           <FormField
             control={form.control}
-            name="typeElement"
+            name="isFavourite"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>

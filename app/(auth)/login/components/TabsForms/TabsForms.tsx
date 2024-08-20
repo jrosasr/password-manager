@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { LoginForm } from "../LoginForm";
+import { RegisterForm } from "../RegisterForm";
 
 export default function TabsForms() {
     return (
@@ -19,7 +20,7 @@ export default function TabsForms() {
             <TabsContent value="signup">
                 <Card>
                     <CardContent className="space-y-2">
-                        <p>Sign Up Form....</p>
+                        <RegisterForm />
                     </CardContent>
                 </Card>
             </TabsContent>
