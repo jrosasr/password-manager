@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -28,9 +28,12 @@ import { copyClipboard } from "@/lib/copyClipboard";
 import { useState } from "react";
 import { generatePassword } from "@/lib/generatePassword";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 export function FormAddElement() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,10 +51,33 @@ export function FormAddElement() {
   });
 
   // 2. Define a submit handler.
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    try {
+      await axios.post("/api/items", values);
+      toast({
+        title: "Elemento creado correctamente",
+      });
+
+      form.reset({
+        typeElement: "",
+        isFavourite: false,
+        name: "",
+        directory: "",
+        username: "",
+        password: "",
+        urlWebsite: "",
+        notes: "",
+        userId: "asdasd-asdasda",
+      });
+
+      router.refresh();
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        variant: "destructive",
+      });
+    }
   };
 
   const generateRandomPassword = () => {
@@ -242,7 +268,9 @@ export function FormAddElement() {
           <div>
             <div className="flex justify-between items-center text-slate-400 text-sm">
               Autenticación TOTP
-              <p className="bg-green-700 mr-5 px-3 rounded-lg text-white text-xs">Premium</p>
+              <p className="bg-green-700 mr-5 px-3 rounded-lg text-white text-xs">
+                Premium
+              </p>
             </div>
             <Input disabled />
           </div>
@@ -252,9 +280,7 @@ export function FormAddElement() {
             name="notes"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="flex justify-between">
-                  Notas
-                </FormLabel>
+                <FormLabel className="flex justify-between">Notas</FormLabel>
                 <FormControl>
                   <Textarea {...field} />
                 </FormControl>
