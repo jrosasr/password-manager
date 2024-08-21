@@ -33,8 +33,8 @@ export default async function favouritePage() {
 
   return (
     <div>
-      <h1>
-        Favourites page
+      <h1 className="font-semibold text-xl md:text-3xl">
+        Página de favoritos
       </h1>
       <DataTableItems elements={user.elements} />
     </div>
