@@ -41,7 +41,7 @@ export const columns: ColumnDef<ColumnProps>[] = [
       const username = row.original.username;
 
       const onEditElement = () => {
-        console.log("Edit element");
+        window.location.href = `/element/${row.original.id}`
       };
 
       return (

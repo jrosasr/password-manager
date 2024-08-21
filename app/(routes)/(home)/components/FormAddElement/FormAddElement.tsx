@@ -32,11 +32,11 @@ import { useRouter } from "next/navigation";
 import { FormAddElementProps } from "./FormAddElement.types";
 
 export function FormAddElement(props: FormAddElementProps) {
-  const { userId } = props;
+  const { userId, closeDialog } = props;
   
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  // 1. Define your form.
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,7 +52,6 @@ export function FormAddElement(props: FormAddElementProps) {
     },
   });
 
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post("/api/items", values);
@@ -70,6 +69,8 @@ export function FormAddElement(props: FormAddElementProps) {
         urlWebsite: "",
         notes: "",
       });
+      
+      closeDialog();
 
       router.refresh();
     } catch (error) {
