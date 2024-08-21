@@ -10,12 +10,12 @@ export function UserGenerator(props: UserGeneratorProps) {
             <p className="mb-4 text-slate-400">Que quieres generar?</p>
             <RadioGroup defaultValue="username" onValueChange={(value) => setUserTypeSelected(value)}>
                 <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="username" id="r2" />
-                    <Label htmlFor="r2">Usuario</Label>
+                    <RadioGroupItem value="username" id="r3" />
+                    <Label htmlFor="r3">Usuario</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="email" id="r1" />
-                    <Label htmlFor="r1">Correo electrónico</Label>
+                    <RadioGroupItem value="email" id="r4" />
+                    <Label htmlFor="r4">Correo electrónico</Label>
                 </div>
             </RadioGroup>
         </div>

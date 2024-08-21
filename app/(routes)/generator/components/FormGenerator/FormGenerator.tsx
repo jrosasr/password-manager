@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { PasswordGenerator } from "./PasswordGenerator";
 import { UserGenerator } from "../UserGenerator";
 import { generateCustomPassword } from "@/lib/generateCustomPassword";
+import { generateRandomUser } from "@/lib/generateRandomUser";
+import { generateRandomEmail } from "@/lib/generateRandomEmail";
 
 export function FormGenerator() {
   const [itemValueInput, setItemValueInput] = useState<string>("");
@@ -32,11 +34,10 @@ export function FormGenerator() {
         specialCharacters: isSpecialCharacters,
         numbers: isNumberSelected,
       });
-  
+
       setItemValueInput(newPassword);
     }
   }, [
-    userTypeSelected,
     lengthPassword,
     isMayusSelected,
     isMinusSelected,
@@ -45,16 +46,42 @@ export function FormGenerator() {
     selectedValue,
   ]);
 
-  const handleGenerateCustomPassword = () => {
-    const newPassword = generateCustomPassword({
-      length: lengthPassword,
-      mayus: isMayusSelected,
-      minus: isMinusSelected,
-      specialCharacters: isSpecialCharacters,
-      numbers: isNumberSelected,
-    });
+  useEffect(() => {
+    let newInputValue = "";
 
-    setItemValueInput(newPassword);
+    if (selectedValue === "user") {
+      newInputValue = generateRandomUser();
+    }
+    if (userTypeSelected === "email") {
+      newInputValue = generateRandomEmail();
+    }
+
+    setItemValueInput(newInputValue);
+  }, [
+    selectedValue,
+    userTypeSelected
+  ]);
+
+  const handleShuffleClick = () => {
+    let newItemValueInput = ''
+
+    if (selectedValue === "password") {
+      newItemValueInput = generateCustomPassword({
+        length: lengthPassword,
+        mayus: isMayusSelected,
+        minus: isMinusSelected,
+        specialCharacters: isSpecialCharacters,
+        numbers: isNumberSelected,
+      });
+  
+    } else if (selectedValue === "user") {
+      if (userTypeSelected === 'email') {
+        newItemValueInput = generateRandomEmail()
+      } else if(userTypeSelected === 'username') {
+        newItemValueInput = generateRandomUser();
+      }
+    }
+    setItemValueInput(newItemValueInput);
   };
 
   return (
@@ -71,7 +98,7 @@ export function FormGenerator() {
         />
         <Shuffle
           className="top-[.6rem] right-3 absolute w-5 h-5 cursor-pointer"
-          onClick={handleGenerateCustomPassword}
+          onClick={handleShuffleClick}
         />
       </div>
       <div className="bg-slate-100 shadow-md my-4 p-4 rounded-md">
