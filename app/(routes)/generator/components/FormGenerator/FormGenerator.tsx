@@ -4,8 +4,10 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { copyClipboard } from "@/lib/copyClipboard";
 import { Copy, Shuffle } from "lucide-react";
-import { useState } from "react";
-import { PasswordGenerator } from "../PasswordGenerator";
+import { useEffect, useState } from "react";
+import { PasswordGenerator } from "./PasswordGenerator";
+import { UserGenerator } from "../UserGenerator";
+import { generateCustomPassword } from "@/lib/generateCustomPassword";
 
 export function FormGenerator() {
   const [itemValueInput, setItemValueInput] = useState<string>("");
@@ -21,6 +23,40 @@ export function FormGenerator() {
   const [isSpecialCharacters, setIsSpecialCharacters] = useState<boolean>(true);
   const [isNumberSelected, setIsNumberSelected] = useState<boolean>(true);
 
+  useEffect(() => {
+    if (selectedValue === "password") {
+      const newPassword = generateCustomPassword({
+        length: lengthPassword,
+        mayus: isMayusSelected,
+        minus: isMinusSelected,
+        specialCharacters: isSpecialCharacters,
+        numbers: isNumberSelected,
+      });
+  
+      setItemValueInput(newPassword);
+    }
+  }, [
+    userTypeSelected,
+    lengthPassword,
+    isMayusSelected,
+    isMinusSelected,
+    isNumberSelected,
+    isSpecialCharacters,
+    selectedValue,
+  ]);
+
+  const handleGenerateCustomPassword = () => {
+    const newPassword = generateCustomPassword({
+      length: lengthPassword,
+      mayus: isMayusSelected,
+      minus: isMinusSelected,
+      specialCharacters: isSpecialCharacters,
+      numbers: isNumberSelected,
+    });
+
+    setItemValueInput(newPassword);
+  };
+
   return (
     <div className="mt-5 max-w-2xl">
       <div className="relative w-full">
@@ -30,10 +66,13 @@ export function FormGenerator() {
           onChange={() => {}}
         />
         <Copy
-          className="top-3 right-12 absolute w-5 h-5 cursor-pointer"
+          className="top-[.6rem] right-12 absolute w-5 h-5 cursor-pointer"
           onClick={() => copyClipboard(itemValueInput)}
         />
-        <Shuffle className="top-3 right-3 absolute w-5 h-5 cursor-pointer" />
+        <Shuffle
+          className="top-[.6rem] right-3 absolute w-5 h-5 cursor-pointer"
+          onClick={handleGenerateCustomPassword}
+        />
       </div>
       <div className="bg-slate-100 shadow-md my-4 p-4 rounded-md">
         <p className="mb-2">Que quieres generar?</p>
@@ -66,7 +105,9 @@ export function FormGenerator() {
         />
       )}
 
-      {selectedValue === "user" && <div>Form User</div>}
+      {selectedValue === "user" && (
+        <UserGenerator setUserTypeSelected={setUserTypeSelected} />
+      )}
     </div>
   );
 }
