@@ -7,7 +7,7 @@ export default async function LoginsElementsPage() {
     const session = await getServerSession()
 
     if (!session || !session.user?.email) {
-        redirect("/login")
+        redirect("/")
       }
     
       const user = await db.user.findUnique({
@@ -27,7 +27,7 @@ export default async function LoginsElementsPage() {
       })
     
       if (!user || !user.elements) {
-        redirect("/login")
+        redirect("/")
       }
 
 

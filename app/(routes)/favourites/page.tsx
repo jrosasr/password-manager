@@ -8,7 +8,7 @@ export default async function favouritePage() {
   const session = await getServerSession()
 
   if (!session || !session.user?.email) {
-    redirect("/login")
+    redirect("/")
   }
 
   const user = await db.user.findUnique({
@@ -28,7 +28,7 @@ export default async function favouritePage() {
   })
 
   if (!user || !user.elements) {
-    redirect("/login")
+    redirect("/")
   }
 
   return (
