@@ -11,6 +11,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "JPassword",
   description: "The Best Password Manager",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
