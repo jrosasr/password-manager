@@ -291,7 +291,7 @@ export function FormAddElement(props: FormAddElementProps) {
 
           <div />
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Guardar</Button>
         </form>
       </Form>
     </div>

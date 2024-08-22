@@ -98,7 +98,7 @@ export function SidebarRoutes() {
         </Accordion>
       ))}
 
-      <SingleItem href="/analytics" icon={BarChart} label="Analytics" />
+      <SingleItem href="/analytics" icon={BarChart} label="Analíticas" />
 
       <SingleItem
         onClick={() => signOut()}

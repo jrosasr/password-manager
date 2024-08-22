@@ -88,7 +88,7 @@ export function LoginForm() {
         />
 
         <Button type="submit" className="w-full">
-          Submit
+          Iniciar Sesión
         </Button>
       </form>
     </Form>

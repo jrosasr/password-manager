@@ -103,7 +103,7 @@ export function RegisterForm() {
         />
 
         <Button type="submit" className="w-full">
-          Submit
+          Guardar
         </Button>
       </form>
     </Form>
