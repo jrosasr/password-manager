@@ -65,7 +65,7 @@ export function HeaderMain(props: HeaderMainProps) {
             </DropdownMenuLabel>
           </DropdownMenuContent>
         </DropdownMenu>
-        <DialogContent className="sm:max-w-[825px] overflow-auto">
+        <DialogContent className="sm:max-w-[825px] h-[85vh] overflow-auto">
           <DialogHeader>
             <DialogTitle>Nueva caja fuerte</DialogTitle>
           </DialogHeader>
