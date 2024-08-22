@@ -2,21 +2,21 @@ import { CreditCard, Earth, Landmark, LayoutList, Lock, Settings, Star, UserPen 
 
 export const dataSidebarElements = [
     {
-        title: "Elements",
+        title: "Cuentas",
         icon: LayoutList,
         children: [
             {
-                item: 'Favourites',
+                item: 'Favoritos',
                 href: '/favourites',
                 icon: Star
             },
             {
-                item: 'Logins',
+                item: 'Cuentas online',
                 href: '/logins-elements',
                 icon: Earth
             },
             {
-                item: 'Credit Cards',
+                item: 'Tarjetas',
                 href: '/credit-card',
                 icon: CreditCard
             },
@@ -26,7 +26,7 @@ export const dataSidebarElements = [
 
 export const dataSidebarConfiguration = [
     {
-        title: "Configuration",
+        title: "Configuración",
         icon: Settings,
         children: [
             {

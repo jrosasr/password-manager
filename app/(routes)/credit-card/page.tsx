@@ -31,7 +31,7 @@ export default async function CreditCardsPage() {
     }
   return (
     <div>
-      <h1 className="font-semibold text-xl md:text-3xl">Targetas de crédito</h1>
+      <h1 className="font-semibold text-xl md:text-3xl">Tarjetas de bancarias</h1>
       <DataTableItems elements={user.elements} />
     </div>
   )

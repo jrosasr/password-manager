@@ -90,7 +90,7 @@ export function ViewAnalyticsChart(props: ViewAnalyticsChartProps) {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Contraseñas creadas
+                          Contraseñas
                         </tspan>
                       </text>
                     );

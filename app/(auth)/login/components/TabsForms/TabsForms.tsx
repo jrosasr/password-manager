@@ -7,8 +7,8 @@ export default function TabsForms() {
     return (
         <Tabs defaultValue="signin" className="w-[320px] md:w-[400px]">
             <TabsList className="grid grid-cols-2 w-full">
-                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                <TabsTrigger value="signin">Iniciar Sesión</TabsTrigger>
+                <TabsTrigger value="signup">Registrarse</TabsTrigger>
             </TabsList>
             <TabsContent value="signin">
                 <Card>
